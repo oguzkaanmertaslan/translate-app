@@ -1,10 +1,8 @@
 
-import SpeechtoText from "./components/SpeechtoText";
+import Translater from "./components/Translater";
 function App() {
   return (
-    <div className="App">
-      <SpeechtoText/>
-    </div>
+    <Translater />
   );
 }
 
