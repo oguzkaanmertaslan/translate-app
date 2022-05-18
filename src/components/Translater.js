@@ -11,6 +11,7 @@ const Translater = () => {
     const [to, setTo] = useState("en");
     const [input, setInput] = useState("");
     const [output, setOutput] = useState("");
+    const [isMicActive, setIsMicActive] = useState(false);
     const { transcript, resetTranscript, listening } = useSpeechRecognition();
     const ref = useRef(transcript);
 
@@ -31,13 +32,17 @@ const Translater = () => {
         })
     };
     const startListening = (e) => {
-        SpeechRecognition.startListening({ continuous: true })
+        if (isMicActive) {
+            SpeechRecognition.stopListening({ continuous: false });
+            setInput((prevState) => (prevState + transcript));
+            setIsMicActive(false);
+        }
+        else {
+            SpeechRecognition.startListening({ continuous: true });
+            setIsMicActive(true);
+        }
     }
 
-    const handleStopListening = (e) => {
-        SpeechRecognition.stopListening({ continuous: false });
-        setInput((prevState) => (prevState + transcript));
-    };
     useEffect(() => {
         axios.get('https://libretranslate.com/languages',
             { headers: { 'accept': 'application/json' } }).then(res => {
@@ -65,7 +70,7 @@ const Translater = () => {
                         cols="50"
                         rows="8"
                         className='source-area'
-                        value={ref.current}
+                        defaultValue={ref.current}
                         onChange={e => {
                             setInput(e.target.value);
                             resetTranscript();
@@ -73,8 +78,7 @@ const Translater = () => {
                         }}
                     />
                     <div className='mic-area'>
-                        <MicIcon onClick={startListening} />
-                        <MicOffIcon className='off-mic' onClick={handleStopListening} />
+                        {isMicActive ? <MicOffIcon onClick={startListening} /> : <MicIcon onClick={startListening} />}
                     </div>
                 </div>
                 <div className='right-area'>
@@ -82,13 +86,12 @@ const Translater = () => {
                     <select className='to-select' onChange={e => setTo(e.target.value)}>
                         {options.map(opt => <option key={opt.code} value={opt.code}>{opt.name}</option>)}
                     </select>
-                    <textarea className='target-area' cols="50" rows="8" value={output} />
+                    <textarea className='target-area' cols="50" rows="8" defaultValue={output} />
                 </div>
             </div>
 
             <div className='translate-button'>
                 <Button variant='contained' onClick={e => translate()}>Translate</Button>
-
             </div>
         </div>
     )
