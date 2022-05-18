@@ -86,7 +86,7 @@ const Translater = () => {
                     <select className='to-select' onChange={e => setTo(e.target.value)}>
                         {options.map(opt => <option key={opt.code} value={opt.code}>{opt.name}</option>)}
                     </select>
-                    <textarea className='target-area' cols="50" rows="8" defaultValue={output} />
+                    <textarea disabled={true} className='target-area' cols="50" rows="8" defaultValue={output} />
                 </div>
             </div>
 
