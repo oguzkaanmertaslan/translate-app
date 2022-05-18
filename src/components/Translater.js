@@ -17,7 +17,7 @@ const Translater = () => {
 
     const translate = () => {
         const params = new URLSearchParams();
-        params.append('q', input);
+        params.append('q', input.toLowerCase());
         params.append('source', from);
         params.append('target', to);
         params.append('api_key', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
