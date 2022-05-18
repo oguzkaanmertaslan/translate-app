@@ -16,7 +16,6 @@
 }
 
 @mixin left-right-area {
-    wdisplay: flex;
     margin-top: 15px;
     flex-direction: column;
     justify-content: space-around;

@@ -36,7 +36,6 @@ h2 {
 }
 
 .left-area {
-  wdisplay: flex;
   margin-top: 15px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -48,7 +47,6 @@ h2 {
 }
 
 .right-area {
-  wdisplay: flex;
   margin-top: 15px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
