@@ -54,7 +54,7 @@ const Translater = () => {
     });
     return (
         <div className='page-area'>
-            <h1>App Translate</h1>
+            <h2>App Translate</h2>
             <div className='select-area'>
                 <div className='left-area'>
                     <label>From ({from}) :</label>
@@ -93,5 +93,4 @@ const Translater = () => {
         </div>
     )
 }
-
 export default Translater
